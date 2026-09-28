@@ -39,7 +39,11 @@ jobs:
             DAYS=7
           fi
           DATE=$(date -u +%F)
-          python3 scripts/weekly.py --days "$DAYS" --date "$DATE" --model small
+          # NOTE: --skip-transcribe because YouTube blocks media downloads
+          # from GitHub-hosted runners (bot check); the alpha is built from
+          # titles + descriptions (roundup mode). Remove the flag if
+          # downloads ever become possible again.
+          python3 scripts/weekly.py --days "$DAYS" --date "$DATE" --model small --skip-transcribe
           echo "ALPHA_DATE=$DATE" >> "$GITHUB_ENV"
 
       - name: Commit alpha and state
