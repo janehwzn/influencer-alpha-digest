@@ -1,7 +1,7 @@
 # 📈 influencer-alpha-digest
 
 Trade with the influencer：每周自动追踪我关注的美股 YouTube 博主，
-把他们过去一周的视频转录成文字，用 AI 提炼成一份中文**每周交易 Alpha**，
+把他们过去一周的视频整理成一份中文**每周交易 Alpha**（当前为标题+简介的 roundup 模式），
 在每周日晚发到邮箱。不用再把每个视频完整看完。
 
 ## 追踪的 Influencer
@@ -30,7 +30,9 @@ Trade with the influencer：每周自动追踪我关注的美股 YouTube 博主�
 ```
 每周一 03:30 UTC（= 周日 20:30 PDT）GitHub Actions 自动运行：
  1. scripts/fetch_videos.py   列出过去 7 天各博主的新视频
- 2. scripts/transcribe.py     下载音频 → faster-whisper 转录成中文文本
+ 2. scripts/transcribe.py     下载音频 → faster-whisper 转录成中文文本（注：YouTube 会拦截 GitHub 服务器的媒体下载，
+                             workflow 默认加 --skip-transcribe，走标题+简介的 roundup 模式；转录代码保留，
+                             以后若下载恢复可用可去掉该 flag）
     （这些频道普遍没有字幕，所以走 ASR；已处理过的视频会跳过）
  3. scripts/analyze.py        Claude（ANTHROPIC_API_KEY）综合成 Alpha；
                               没有 key 时降级为启发式摘录（ticker 统计+关键词句）
@@ -51,6 +53,6 @@ Trade with the influencer：每周自动追踪我关注的美股 YouTube 博主�
 
 ## 免责声明
 
-本项目所有内容由 AI 根据公开 YouTube 视频转录文本整理生成，仅供学习交流，
+本项目所有内容由 AI 根据公开 YouTube 视频（标题/简介；转录可用时为转录文本）整理生成，仅供学习交流，
 **不构成任何投资建议**。转录与模型提炼可能存在误差，请以原视频为准。
 投资有风险，决策请独立判断。
