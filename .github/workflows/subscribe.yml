@@ -1,0 +1,57 @@
+name: Subscription Bot
+
+# Self-service subscribe/unsubscribe: anyone opens an issue titled
+# "Subscribe" (or "Unsubscribe") with their email in the body, and this
+# workflow updates subscribers.txt, replies, and closes the issue.
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+# Serialize runs so concurrent subscribes can't clobber subscribers.txt.
+concurrency:
+  group: subscribers
+  cancel-in-progress: false
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Process subscription request
+        id: sub
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          python3 subscribe.py > /tmp/result.json
+          cat /tmp/result.json
+          {
+            echo "action=$(python3 -c "import json; print(json.load(open('/tmp/result.json'))['action'])")"
+            echo "changed=$(python3 -c "import json; print(str(json.load(open('/tmp/result.json'))['changed']).lower())")"
+            echo "message<<MSGEOF"
+            python3 -c "import json; print(json.load(open('/tmp/result.json'))['message'])"
+            echo "MSGEOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Commit subscriber list
+        if: steps.sub.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add subscribers.txt
+          git commit -m "Update subscribers (via issue #${{ github.event.issue.number }})"
+          git pull --rebase
+          git push
+
+      - name: Reply and close issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "$ISSUE_NUMBER" --body "${{ steps.sub.outputs.message }}"
+          gh issue close "$ISSUE_NUMBER" --reason completed
