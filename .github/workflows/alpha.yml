@@ -64,6 +64,7 @@ jobs:
           MD="data/alpha-${{ env.ALPHA_DATE }}.md"
           HTML="data/alpha-${{ env.ALPHA_DATE }}.html"
           python3 scripts/send_email.py "$MD" --html "$HTML" \
+            --recipients-file subscribers.txt \
             --subject "📈 Influencer Alpha 周报 ${{ env.ALPHA_DATE }}"
 
       - name: Upload alpha artifact
