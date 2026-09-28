@@ -12,25 +12,26 @@ import re
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 CSS = """
-body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
-background:#0d1117;color:#e6edf3;margin:0;padding:24px}
+body{font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+background:#f6f8fa;color:#1f2328;margin:0;padding:24px}
 .wrap{max-width:680px;margin:0 auto}
-.hero{background:linear-gradient(135deg,#0d3327,#123f2c);border:1px solid #1f6f43;
+.hero{background:linear-gradient(135deg,#e6f4ea,#c8e6c9);border:1px solid #a3c9a8;
 border-radius:12px;padding:28px 24px;margin-bottom:20px}
-.hero h1{margin:0 0 8px;font-size:22px;color:#7ee2a8}
-.hero p{margin:4px 0;color:#9fb3a8;font-size:14px}
-.sec{background:#161b22;border:1px solid #30363d;border-radius:10px;
-padding:18px 20px;margin-bottom:14px}
-.sec h2{margin:0 0 12px;font-size:17px;color:#f0b429}
+.hero h1{margin:0 0 8px;font-size:23px;color:#0d5c2e}
+.hero p{margin:4px 0;color:#3d5a45;font-size:14.5px;line-height:1.6}
+.sec{background:#ffffff;border:1px solid #d0d7de;border-radius:10px;
+padding:18px 22px;margin-bottom:14px}
+.sec h2{margin:0 0 12px;font-size:18px;color:#0d5c2e}
 .sec ul{margin:0;padding-left:20px}
-.sec li{margin:7px 0;font-size:14.5px;line-height:1.65}
-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
-th,td{border:1px solid #30363d;padding:7px 9px;text-align:left}
-th{background:#1c2b22;color:#7ee2a8}
-a{color:#58a6ff;text-decoration:none}
-.src{font-size:13px;color:#8b949e}
-.disc{background:#1a1a1a;border:1px solid #444;border-radius:10px;
-padding:14px 18px;font-size:12.5px;color:#8b949e;margin-top:16px}
+.sec li{margin:8px 0;font-size:15.5px;line-height:1.75;color:#1f2328}
+.sec p{font-size:15.5px;line-height:1.75;color:#1f2328}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px;color:#1f2328}
+th,td{border:1px solid #d0d7de;padding:8px 10px;text-align:left}
+th{background:#e6f4ea;color:#0d5c2e}
+a{color:#0969da;text-decoration:none}
+.src{font-size:13.5px;color:#57606a;line-height:1.6}
+.disc{background:#fff8e1;border:1px solid #e0b93c;border-radius:10px;
+padding:14px 18px;font-size:13.5px;line-height:1.7;color:#5c4a00;margin-top:16px}
 .mode{display:inline-block;font-size:12px;background:#1f6f43;color:#fff;
 border-radius:20px;padding:2px 10px;margin-left:8px}
 """
