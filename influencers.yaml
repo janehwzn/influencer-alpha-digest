@@ -1,0 +1,33 @@
+# YouTube influencers tracked for the weekly trading alpha.
+# Fields:
+#   name       display name used in the digest
+#   handle     YouTube handle
+#   channel_id canonical channel id (for reference; listing uses the handle URL)
+#   url        channel page
+#   cadence    observed upload cadence
+#   focus      what this creator usually covers
+#   lang       primary language of the videos
+
+- name: 猫姐美股交易
+  handle: "@catstocktrading"
+  channel_id: UCjuvy7VvwUGPtTnbpfYY1QQ
+  url: https://www.youtube.com/@catstocktrading
+  cadence: 每周一更（周末发布美股周复盘）
+  focus: 美股大盘周复盘、指数关键点位、头部个股与板块轮动
+  lang: zh
+
+- name: 藤缠树
+  handle: "@bigtreesignal"
+  channel_id: UCaiXeXjuAGiJ1ps2URHHVqQ
+  url: https://www.youtube.com/@bigtreesignal
+  cadence: 约每周一更（周末复盘，偶尔跳过一周）
+  focus: 周末市场复盘、技术面信号、交易节奏
+  lang: zh
+
+- name: Allen 的正念交易
+  handle: "@Allen的正念交易"
+  channel_id: UC-P3T0hyQUnDYLXeCEaA5CQ
+  url: https://www.youtube.com/@Allen的正念交易
+  cadence: 不定期（近几个月约每月 1-2 更）
+  focus: 美股交易心态与市场观点评论
+  lang: zh
