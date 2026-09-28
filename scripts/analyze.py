@@ -19,12 +19,13 @@ from collections import Counter
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DISCLAIMER = (
-    chr(10) + "---" + chr(10)
-    + "> 免责声明：本期内容由 AI 根据公开 YouTube 视频转录文本整理生成，"
-    + "仅供学习交流，不构成任何投资建议。转录与模型提炼可能存在误差，"
-    + "请以原视频为准，投资有风险，决策请独立判断。" + chr(10)
-)
+def disclaimer(mode):
+    src = ("公开 YouTube 视频转录文本" if mode in ("claude", "heuristic")
+           else "公开 YouTube 视频标题与简介")
+    return (chr(10) + "---" + chr(10)
+            + "> 免责声明：本期内容由 AI 根据" + src + "整理生成，"
+            + "仅供学习交流，不构成任何投资建议。转录与模型提炼可能存在误差，"
+            + "请以原视频为准，投资有风险，决策请独立判断。" + chr(10))
 
 SYSTEM_PROMPT = (
     "你是资深美股交易分析师，擅长把中文财经视频内容提炼成可执行的交易前瞻。"
@@ -53,7 +54,7 @@ STOPWORDS = set(
     "US TV TA IT IS BE HE WE ME MY UP ON IN OF TO AT BY OR AS AN NO SO DO GO "
     "IF VS SEP OCT NOV DEC JAN FEB MAR APR MAY JUN JUL AUG "
     "MON TUE WED THU FRI SAT SUN PM AM EST PST PT ET "
-    "REVIEW WEEKLY DAILY LIVE PART EPISODE EP TRADE TRADING SIGNAL SIGNALS"
+    "REVIEW WEEKLY DAILY LIVE PART EPISODE EP TRADE TRADING SIGNAL SIGNALS "+ "SEPT RALLY RISK ELECTION EXPLODING EXPLODE DEADLY SURGE PLUNGE SOAR "+ "CRASH REAL REVERSAL RECAP"
     .split()
 )
 
@@ -132,7 +133,7 @@ def heuristic_alpha(videos):
     tickers = Counter()
     ticker_src = {}
     for v in videos:
-        for m in TICKER_RE.findall(v["text"]):
+        for m in TICKER_RE.findall(v["text"].upper()):
             if len(m) >= 2 and m not in STOPWORDS and not m.isdigit():
                 tickers[m] += 1
                 ticker_src.setdefault(m, set()).add(v["channel"])
@@ -172,7 +173,7 @@ def description_alpha(items):
     ticker_src = {}
     for it in items:
         blob = it["title"] + "\n" + it.get("description", "")
-        for m in TICKER_RE.findall(blob):
+        for m in TICKER_RE.findall(blob.upper()):
             if len(m) >= 2 and m not in STOPWORDS and not m.isdigit():
                 tickers[m] += 1
                 ticker_src.setdefault(m, set()).add(it["channel"])
@@ -270,7 +271,7 @@ def main():
                    + v["url"] + ")（" + v["upload_date"] + "）" + chr(10))
     header += chr(10)
     out = os.path.join(BASE, "data", "alpha-" + args.date + ".md")
-    open(out, "w", encoding="utf-8").write(header + body + DISCLAIMER)
+    open(out, "w", encoding="utf-8").write(header + body + disclaimer(mode))
     print("Wrote " + out, flush=True)
 
 
