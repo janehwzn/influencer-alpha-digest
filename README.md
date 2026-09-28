@@ -4,6 +4,12 @@ Trade with the influencer：每周自动追踪我关注的美股 YouTube 博主�
 把他们过去一周的视频整理成一份中文**每周交易 Alpha**（当前为标题+简介的 roundup 模式），
 在每周日晚发到邮箱。不用再把每个视频完整看完。
 
+## 📬 订阅
+
+想收到每周 Alpha？去 [Issues](../../issues/new) 开一个标题为 **Subscribe** 的 issue，
+正文写上你的邮箱地址，机器人会自动把你加入订阅列表并回复确认。
+退订同样开一个标题为 **Unsubscribe** 的 issue 即可。
+
 ## 追踪的 Influencer
 
 | 博主 | YouTube | 更新节奏 | 主要内容 |
@@ -36,7 +42,7 @@ Trade with the influencer：每周自动追踪我关注的美股 YouTube 博主�
     （这些频道普遍没有字幕，所以走 ASR；已处理过的视频会跳过）
  3. scripts/analyze.py        Claude（ANTHROPIC_API_KEY）综合成 Alpha；
                               没有 key 时降级为启发式摘录（ticker 统计+关键词句）
- 4. scripts/render_html.py    渲染成深色财经风 HTML 邮件
+ 4. scripts/render_html.py    渲染成浅色高对比 HTML 邮件
  5. scripts/send_email.py     经 Gmail 发到收件人
 ```
 
