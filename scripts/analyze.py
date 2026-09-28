@@ -49,7 +49,12 @@ STOPWORDS = set(
     "MORE WITH FROM THIS THAT THEY WHAT WHEN WHERE WHICH THEIR THERE THESE "
     "THOSE THEN THAN INTO OVER SUCH ONLY WILL JUST NOW TODAY WEEK VIDEO MARKET "
     "STOCK BULL BEAR ETF FED CPI GDP USA LONG SHORT BUY SELL HOLD CALL PUT "
-    "LIVE QQQ SPY DIA IWM TLT GLD USO BTC ETH AI CEO IPO NEW TOP HOT".split()
+    "LIVE BTC ETH AI CEO IPO NEW TOP HOT "
+    "US TV TA IT IS BE HE WE ME MY UP ON IN OF TO AT BY OR AS AN NO SO DO GO "
+    "IF VS SEP OCT NOV DEC JAN FEB MAR APR MAY JUN JUL AUG "
+    "MON TUE WED THU FRI SAT SUN PM AM EST PST PT ET "
+    "REVIEW WEEKLY DAILY LIVE PART EPISODE EP TRADE TRADING SIGNAL SIGNALS"
+    .split()
 )
 
 TICKER_RE = re.compile(r"\b[A-Z]{1,5}\b")
@@ -128,7 +133,7 @@ def heuristic_alpha(videos):
     ticker_src = {}
     for v in videos:
         for m in TICKER_RE.findall(v["text"]):
-            if m not in STOPWORDS and not m.isdigit():
+            if len(m) >= 2 and m not in STOPWORDS and not m.isdigit():
                 tickers[m] += 1
                 ticker_src.setdefault(m, set()).add(v["channel"])
     for t, c in tickers.most_common(25):
@@ -168,7 +173,7 @@ def description_alpha(items):
     for it in items:
         blob = it["title"] + "\n" + it.get("description", "")
         for m in TICKER_RE.findall(blob):
-            if m not in STOPWORDS and not m.isdigit():
+            if len(m) >= 2 and m not in STOPWORDS and not m.isdigit():
                 tickers[m] += 1
                 ticker_src.setdefault(m, set()).add(it["channel"])
     for t, c in tickers.most_common(20):
