@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Weekly orchestrator: fetch -> transcribe -> analyze -> render.
 
-Transcription picks the fast path automatically: if SUPADATA_API_KEY is set,
-transcripts come from the Supadata API (no YouTube download needed, works on
-GitHub runners); otherwise it falls back to local yt-dlp + faster-whisper.
+Transcription picks the fast path automatically:
+  1. GROQ_API_KEY set -> Groq Whisper API (free tier ~8h audio/day, no card);
+     downloads audio with yt-dlp, so it works on GitHub runners.
+  2. SUPADATA_API_KEY set -> Supadata API transcript (no YouTube download).
+  3. otherwise -> local yt-dlp + faster-whisper.
 
 Usage: python3 scripts/weekly.py [--days 7] [--date 2026-09-28] [--model small]
 """
@@ -38,7 +40,12 @@ def main():
        "--days", str(args.days), "--date", args.date,
        "--out", manifest)
     if not args.skip_transcribe:
-        if os.environ.get("SUPADATA_API_KEY"):
+        if os.environ.get("GROQ_API_KEY"):
+            # Fast path: Groq Whisper API (generous free tier). Downloads
+            # audio with yt-dlp, so it works on GitHub runners.
+            sh(sys.executable, os.path.join(SCRIPTS, "groq_transcribe.py"),
+               "--manifest", manifest)
+        elif os.environ.get("SUPADATA_API_KEY"):
             # Fast path: Supadata API transcript (AI fallback for no-caption
             # videos). No media download, so it works on GitHub runners.
             sh(sys.executable, os.path.join(SCRIPTS, "supadata_transcribe.py"),
