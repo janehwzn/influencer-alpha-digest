@@ -36,10 +36,9 @@ Trade with the influencer：每周自动追踪我关注的美股 YouTube 博主�
 ```
 每周一 03:30 UTC（= 周日 20:30 PDT）GitHub Actions 自动运行：
  1. scripts/fetch_videos.py   列出过去 7 天各博主的新视频
- 2. scripts/transcribe.py     下载音频 → faster-whisper 转录成中文文本（注：YouTube 会拦截 GitHub 服务器的媒体下载，
-                             workflow 默认加 --skip-transcribe，走标题+简介的 roundup 模式；转录代码保留，
-                             以后若下载恢复可用可去掉该 flag）
-    （这些频道普遍没有字幕，所以走 ASR；已处理过的视频会跳过）
+ 2. scripts/supadata_transcribe.py  经 Supadata API 获取转录文本（无字幕视频自动走 AI 转录；
+                             无需下载 YouTube 媒体，可在 GitHub runner 上运行；已处理过的视频会跳过）
+    （本地无 SUPADATA_API_KEY 时降级为 scripts/transcribe.py：下载音频 → faster-whisper 本地转录）
  3. scripts/analyze.py        Claude（ANTHROPIC_API_KEY）综合成 Alpha；
                               没有 key 时降级为启发式摘录（ticker 统计+关键词句）
  4. scripts/render_html.py    渲染成浅色高对比 HTML 邮件
@@ -56,6 +55,7 @@ Trade with the influencer：每周自动追踪我关注的美股 YouTube 博主�
 | `GMAIL_APP_PASSWORD` | 是 | Gmail 应用专用密码 |
 | `RECIPIENT` | 否 | 收件人（逗号分隔，默认发给 `GMAIL_USER`） |
 | `ANTHROPIC_API_KEY` | 否 | 强烈推荐；没有它 Alpha 会降级为启发式版本 |
+| `SUPADATA_API_KEY` | 是 | Supadata 转录 API key（无字幕视频走 AI 转录；有免费额度） |
 
 ## 免责声明
 
