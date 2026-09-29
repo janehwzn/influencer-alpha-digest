@@ -32,6 +32,7 @@ jobs:
       - name: Run weekly pipeline
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SUPADATA_API_KEY: ${{ secrets.SUPADATA_API_KEY }}
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             DAYS="${{ inputs.days }}"
@@ -39,11 +40,9 @@ jobs:
             DAYS=7
           fi
           DATE=$(date -u +%F)
-          # NOTE: --skip-transcribe because YouTube blocks media downloads
-          # from GitHub-hosted runners (bot check); the alpha is built from
-          # titles + descriptions (roundup mode). Remove the flag if
-          # downloads ever become possible again.
-          python3 scripts/weekly.py --days "$DAYS" --date "$DATE" --model small --skip-transcribe
+          # Transcripts via Supadata API (SUPADATA_API_KEY secret); no media
+          # download needed so this works on GitHub-hosted runners.
+          python3 scripts/weekly.py --days "$DAYS" --date "$DATE" --model small
           echo "ALPHA_DATE=$DATE" >> "$GITHUB_ENV"
 
       - name: Commit alpha and state
