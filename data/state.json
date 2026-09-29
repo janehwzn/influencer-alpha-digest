@@ -1,3 +1,24 @@
 {
- "processed": {}
+ "processed": {
+  "Bw4oFKqV6yA": {
+   "title": "US Stock Market Weekly Review (Sept 27, 2026)",
+   "channel": "猫姐美股交易",
+   "url": "https://www.youtube.com/watch?v=Bw4oFKqV6yA",
+   "upload_date": "2026-09-26",
+   "transcript": "transcripts/Bw4oFKqV6yA.txt",
+   "chars": 13679,
+   "date": "2026-09-28",
+   "via": "local-whisper"
+  },
+  "XuuR_j3EVkY": {
+   "title": "bigtreesignal 美股交易信号（Sep 20）",
+   "channel": "藤缠树",
+   "url": "https://www.youtube.com/watch?v=XuuR_j3EVkY",
+   "upload_date": "2026-09-22",
+   "transcript": "transcripts/XuuR_j3EVkY.txt",
+   "chars": 8396,
+   "date": "2026-09-28",
+   "via": "local-whisper"
+  }
+ }
 }
