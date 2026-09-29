@@ -22,6 +22,8 @@ border-radius:12px;padding:28px 24px;margin-bottom:20px}
 .sec{background:#ffffff;border:1px solid #d0d7de;border-radius:10px;
 padding:18px 22px;margin-bottom:14px}
 .sec h2{margin:0 0 12px;font-size:18px;color:#0d5c2e}
+.sec h3{margin:20px 0 10px;font-size:16px;color:#0d5c2e;padding:7px 12px;
+background:#eef6f0;border-left:4px solid #1f6f43;border-radius:0 6px 6px 0}
 .sec ul{margin:0;padding-left:20px}
 .sec li{margin:8px 0;font-size:15.5px;line-height:1.75;color:#1f2328}
 .sec p{font-size:15.5px;line-height:1.75;color:#1f2328}
@@ -84,6 +86,8 @@ def parse(md):
             t = line[3:].strip()
             cur_title = SECTION_TITLES.get(t, t)
             cur_blocks = []
+        elif line.startswith("### "):
+            add_block("h3", line[4:].strip())
         elif line.startswith("> "):
             q = line[2:].strip()
             if cur_title is None:
@@ -121,6 +125,8 @@ def render_block(kind, payload):
         return "<table>" + "".join(rows) + "</table>"
     if kind == "quote":
         return f'<p class="src">{inline(payload)}</p>'
+    if kind == "h3":
+        return f"<h3>{inline(payload)}</h3>"
     return f"<p>{inline(payload)}</p>"
 
 
