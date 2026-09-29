@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """Weekly orchestrator: fetch -> transcribe -> analyze -> render.
 
+Transcription picks the fast path automatically: if SUPADATA_API_KEY is set,
+transcripts come from the Supadata API (no YouTube download needed, works on
+GitHub runners); otherwise it falls back to local yt-dlp + faster-whisper.
+
 Usage: python3 scripts/weekly.py [--days 7] [--date 2026-09-28] [--model small]
 """
 import argparse
@@ -34,8 +38,14 @@ def main():
        "--days", str(args.days), "--date", args.date,
        "--out", manifest)
     if not args.skip_transcribe:
-        sh(sys.executable, os.path.join(SCRIPTS, "transcribe.py"),
-           "--manifest", manifest, "--model", args.model)
+        if os.environ.get("SUPADATA_API_KEY"):
+            # Fast path: Supadata API transcript (AI fallback for no-caption
+            # videos). No media download, so it works on GitHub runners.
+            sh(sys.executable, os.path.join(SCRIPTS, "supadata_transcribe.py"),
+               "--manifest", manifest)
+        else:
+            sh(sys.executable, os.path.join(SCRIPTS, "transcribe.py"),
+               "--manifest", manifest, "--model", args.model)
     sh(sys.executable, os.path.join(SCRIPTS, "analyze.py"),
        "--date", args.date)
     sh(sys.executable, os.path.join(SCRIPTS, "render_html.py"),
