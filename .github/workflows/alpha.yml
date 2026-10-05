@@ -56,17 +56,11 @@ jobs:
           git pull --rebase
           git push
 
-      - name: Send email
-        env:
-          GMAIL_USER: ${{ secrets.GMAIL_USER }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          RECIPIENT: ${{ secrets.RECIPIENT }}
-        run: |
-          MD="data/alpha-${{ env.ALPHA_DATE }}.md"
-          HTML="data/alpha-${{ env.ALPHA_DATE }}.html"
-          python3 scripts/send_email.py "$MD" --html "$HTML" \
-            --recipients-file subscribers.txt \
-            --subject "📈 Influencer Alpha 周报 ${{ env.ALPHA_DATE }}"
+      # NOTE (2026-10-05): email sending was removed from this workflow.
+      # The pipeline now only fetches + transcribes + archives. The weekly
+      # newsletter email (deep analysis written by Muse's own model) is sent
+      # by the Sunday deep-dive cron instead. Never re-add a heuristic-fallback
+      # email send here: the user has explicitly rejected heuristic digests.
 
       - name: Upload alpha artifact
         uses: actions/upload-artifact@v4
