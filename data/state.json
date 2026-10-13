@@ -19,6 +19,26 @@
    "chars": 8396,
    "date": "2026-09-28",
    "via": "local-whisper"
+  },
+  "S1VWzc7ZT_0": {
+   "title": "US Stock Market Review for the Week of Oct 11, 2026",
+   "channel": "猫姐美股交易",
+   "url": "https://www.youtube.com/watch?v=S1VWzc7ZT_0",
+   "upload_date": "2026-10-10",
+   "transcript": "transcripts/S1VWzc7ZT_0.txt",
+   "chars": 28538,
+   "date": "2026-10-13",
+   "via": "faster-whisper-local"
+  },
+  "4dV3wWG0gq0": {
+   "title": "bigtreesignal 美股交易信号（Oct 04）周末复盘展望+Ai量化交易agent模型分析分享",
+   "channel": "藤缠树",
+   "url": "https://www.youtube.com/watch?v=4dV3wWG0gq0",
+   "upload_date": "2026-10-05",
+   "transcript": "transcripts/4dV3wWG0gq0.txt",
+   "chars": 11457,
+   "date": "2026-10-13",
+   "via": "faster-whisper-local"
   }
  }
 }
