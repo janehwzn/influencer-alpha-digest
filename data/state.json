@@ -79,6 +79,26 @@
    "chars": 10850,
    "date": "2026-10-26",
    "via": "faster-whisper-local"
+  },
+  "ZAtPIPNKTZ0": {
+   "title": "11/01 Weekly US Stock Market Review: Positive Signals Amidst the Plunge; Mutual Fund Fiscal Year-...",
+   "channel": "猫姐美股交易",
+   "url": "https://www.youtube.com/watch?v=ZAtPIPNKTZ0",
+   "upload_date": "2026-10-31",
+   "date": "2026-11-02",
+   "transcript": "transcripts/ZAtPIPNKTZ0.txt",
+   "chars": 14539,
+   "via": "faster-whisper-local"
+  },
+  "mExHm6k7GbQ": {
+   "title": "bigtreesignal 美股交易信号Oct 26更新讲解",
+   "channel": "藤缠树",
+   "url": "https://www.youtube.com/watch?v=mExHm6k7GbQ",
+   "upload_date": "2026-10-27",
+   "date": "2026-11-02",
+   "transcript": "transcripts/mExHm6k7GbQ.txt",
+   "chars": 15845,
+   "via": "faster-whisper-local"
   }
  }
 }
