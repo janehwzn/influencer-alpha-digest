@@ -99,6 +99,36 @@
    "transcript": "transcripts/mExHm6k7GbQ.txt",
    "chars": 15845,
    "via": "faster-whisper-local"
+  },
+  "cx8wu3sEpQk": {
+   "title": "November 8, 2026 US Stock Market Recap: The Predictions Were True! Semiconductor SOXL to Undergo ...",
+   "channel": "猫姐美股交易",
+   "url": "https://www.youtube.com/watch?v=cx8wu3sEpQk",
+   "upload_date": "2026-11-07",
+   "transcript": "transcripts/cx8wu3sEpQk.txt",
+   "chars": 14307,
+   "date": "2026-11-09",
+   "via": "faster-whisper-local"
+  },
+  "lxqAyCHZImY": {
+   "title": "如何加载，更新 bigtreesignal 美股交易信号和alert",
+   "channel": "藤缠树",
+   "url": "https://www.youtube.com/watch?v=lxqAyCHZImY",
+   "upload_date": "2026-11-05",
+   "transcript": "transcripts/lxqAyCHZImY.txt",
+   "chars": 4631,
+   "date": "2026-11-09",
+   "via": "faster-whisper-local"
+  },
+  "5gfVKZCfvi0": {
+   "title": "bigtreesignal 美股交易信号（Nov 1）周末复盘展望,关注下周潜在的买信号 #qqq #spx #dia #smh #iwm  #美债 #大盘分析 #缠论",
+   "channel": "藤缠树",
+   "url": "https://www.youtube.com/watch?v=5gfVKZCfvi0",
+   "upload_date": "2026-11-02",
+   "transcript": "transcripts/5gfVKZCfvi0.txt",
+   "chars": 11888,
+   "date": "2026-11-09",
+   "via": "faster-whisper-local"
   }
  }
 }
